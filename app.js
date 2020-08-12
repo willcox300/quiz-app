@@ -30,7 +30,7 @@ const STORE = {
         'Lothlorien',
         'Moria',
       ],
-      correctAnswer: 'Lonely Mountain'
+      correctAnswer: 'Lothlorien'
     },
     {
       question: "Where was Treebeard's home?",
@@ -93,15 +93,17 @@ createStartButton();
 function generateQuestionPage(){
   //this should create the html for the question page
   $('main').html(` 
-    <h1>Question ${STORE.questionNumber+1}</h1>
-      <div class="container">${STORE.questions[STORE.questionNumber].question}</div>
+    <h2>Question ${STORE.questionNumber+1} of 5</h2>
+    <h3>Your current score is ${STORE.score} correct out of 5<br>
+    Your rank so far is ${STORE.rank[STORE.score]}</h3>  
+    <div class="container">${STORE.questions[STORE.questionNumber].question}</div>
       <h2>Answers:</h2>
       <form action="submit" class="answers">
-        <input type="radio" id="ans1" name="answer" value="ans1">
+        <input type="radio" id="ans1" name="answers" value="${STORE.questions[STORE.questionNumber].answers[0]}" required="required">
         <label for="ans1">${STORE.questions[STORE.questionNumber].answers[0]}</label><br>
-        <input type="radio" id="ans2" name="answer" value="ans2">
+        <input type="radio" id="ans2" name="answers" value="${STORE.questions[STORE.questionNumber].answers[1]}">
         <label for="ans2">${STORE.questions[STORE.questionNumber].answers[1]}</label><br>
-        <input type="radio" id="ans3" name="answer" value="ans3">
+        <input type="radio" id="ans3" name="answers" value="${STORE.questions[STORE.questionNumber].answers[2]}">
         <label for="ans3">${STORE.questions[STORE.questionNumber].answers[2]}</label><br>
         <button type="submit">Submit</button>
       </form>`
@@ -111,13 +113,30 @@ function hideHeader(){
   $('header').toggleClass('hidden');
 }
 
-function createFooter(){
-  $('body').append(`
-    <footer>
-      You have answered ${score} questions correctly<br>
-      Your rank is ${SCORE.rank[score]}!
-    </footer>
+function createResultsPage(){
+  $('main').html(`
+    <p>
+      You have answered ${STORE.score} out of 5 questions correctly,<br>
+      Your final rank is ${STORE.rank[STORE.score]}!
+    </p>
+    <button id="tryAgain">Try Again!</button>
   `);
+}
+
+function checkAnswer(){
+  let answer=$('input[name=answers]:checked').val();
+  console.log(answer);
+  if(STORE.questions[STORE.questionNumber].correctAnswer == answer){
+    STORE.score++;
+    $('main').html(`
+      <p>That's correct!</p>
+      <button id="next">Next Question</button>`);   
+  } else{
+    $('main').html(`
+      <p>Sorry, that's not correct.<br>
+      The correct answer is ${STORE.questions[STORE.questionNumber].correctAnswer}.</p>
+      <button id="next">Next Question</button>`);
+  }
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -127,3 +146,28 @@ function createFooter(){
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+$('header').on('click', 'button', function(){
+  hideHeader();
+  generateQuestionPage();
+  });
+
+$('main').on('submit', 'form', function(event){
+  event.preventDefault();
+  checkAnswer();
+  console.log(STORE.score);
+});
+
+$('main').on('click', '#next', function(){
+  if(STORE.questionNumber<STORE.questions.length-1){
+    STORE.questionNumber++;
+    generateQuestionPage();
+  } else{
+    createResultsPage();
+  }
+});
+
+$('main').on('click', '#tryAgain', function(){
+  console.log('debug');
+  location.reload();
+})
