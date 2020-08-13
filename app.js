@@ -85,7 +85,9 @@ const STORE = {
 function createStartButton(){
   $('header').html(`
   <h1>Are you a master of Middle Earth?</h1>
-  <button>Start</button`
+  <div class="centerButton">
+    <button id="start">Start</button>
+  </div>`
   );
 }
 createStartButton();
@@ -93,19 +95,29 @@ createStartButton();
 function generateQuestionPage(){
   //this should create the html for the question page
   $('main').html(` 
-    <h2>Question ${STORE.questionNumber+1} of 5</h2>
-    <h3>Your current score is ${STORE.score} correct out of 5<br>
+    <h2 class="element">Question ${STORE.questionNumber+1} of 5</h2>
+    <h3>Your score is ${STORE.score} correct out of 5<br><br>
     Your rank so far is ${STORE.rank[STORE.score]}</h3>  
-    <div class="container">${STORE.questions[STORE.questionNumber].question}</div>
-      <h2>Answers:</h2>
+    <div class="container element">${STORE.questions[STORE.questionNumber].question}</div>
+      <h2 class="element">Answers:</h2>
       <form action="submit" class="answers">
-        <input type="radio" id="ans1" name="answers" value="${STORE.questions[STORE.questionNumber].answers[0]}" required="required">
-        <label for="ans1">${STORE.questions[STORE.questionNumber].answers[0]}</label><br>
-        <input type="radio" id="ans2" name="answers" value="${STORE.questions[STORE.questionNumber].answers[1]}">
-        <label for="ans2">${STORE.questions[STORE.questionNumber].answers[1]}</label><br>
-        <input type="radio" id="ans3" name="answers" value="${STORE.questions[STORE.questionNumber].answers[2]}">
-        <label for="ans3">${STORE.questions[STORE.questionNumber].answers[2]}</label><br>
-        <button type="submit">Submit</button>
+        <div class="formAlign">
+          <div class="innerDiv">
+            <input type="radio" id="ans1" name="answers" value="${STORE.questions[STORE.questionNumber].answers[0]}" required="required">
+            <label for="ans1">${STORE.questions[STORE.questionNumber].answers[0]}</label><br>
+          </div>
+          <div class="innerDiv">
+            <input type="radio" id="ans2" name="answers" value="${STORE.questions[STORE.questionNumber].answers[1]}">
+            <label for="ans2">${STORE.questions[STORE.questionNumber].answers[1]}</label><br>
+          </div>
+          <div class="innerDiv">
+            <input type="radio" id="ans3" name="answers" value="${STORE.questions[STORE.questionNumber].answers[2]}">
+            <label for="ans3">${STORE.questions[STORE.questionNumber].answers[2]}</label><br>
+          </div>
+        </div>
+        <div class="centerButton">
+          <button type="submit">Submit</button>
+        </div>
       </form>`
   );}
 
@@ -115,12 +127,13 @@ function hideHeader(){
 
 function createResultsPage(){
   $('main').html(`
-    <p>
-      You have answered ${STORE.score} out of 5 questions correctly,<br>
-      Your final rank is ${STORE.rank[STORE.score]}!
-    </p>
-    <button id="tryAgain">Try Again!</button>
-  `);
+    <div >
+      <p id="p2">You have answered ${STORE.score} out of 5 questions correctly,<br><br>
+      Your final rank is ${STORE.rank[STORE.score]}!</p>
+    </div>
+    <div class="centerButton">
+      <button id="tryAgain">Try Again!</button>
+    </div>`);
 }
 
 function checkAnswer(){
@@ -129,13 +142,17 @@ function checkAnswer(){
   if(STORE.questions[STORE.questionNumber].correctAnswer == answer){
     STORE.score++;
     $('main').html(`
-      <p>That's correct!</p>
-      <button id="next">Next Question</button>`);   
+      <p id="correct">That's correct!</p>
+      <div class="centerButton">  
+        <button id="next">Next Question</button>
+      </div>`);   
   } else{
     $('main').html(`
-      <p>Sorry, that's not correct.<br>
+      <p id="notCorrect">Sorry, that's not correct.<br><br>
       The correct answer is ${STORE.questions[STORE.questionNumber].correctAnswer}.</p>
-      <button id="next">Next Question</button>`);
+      <div class="centerButton">  
+        <button id="next">Next Question</button>
+      </div>`);   
   }
 }
 

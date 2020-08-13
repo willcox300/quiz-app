@@ -9,3 +9,155 @@
 .hidden{
   display:none;
 }
+h1{
+  text-align: center;
+  font-size: 30px;
+  background-color: black;
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+body{
+  margin: 0;
+  background-image: url('images/map-small.jpg');
+  background-size: 100%;
+  background-color: tan;
+  opacity: 1;
+}
+
+#startContainer {
+  display: flex;
+  justify-content: center;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+main h2{
+  text-align: center;
+  color: white;
+  font-weight: 700;
+}
+
+main h3{
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 30px;
+}
+
+main p{
+  padding: 10px;
+}
+.container{
+  text-align: center;
+  font-size: x-large;
+  color: white;
+}
+
+form{
+display: inline-block;
+justify-content: center;
+}
+label{
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: larger;
+  font-weight: 600;
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+}
+
+input [type=radio]{
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+}
+
+#next{
+  width: 100px;
+ }
+
+#correct{
+  text-align: center;
+  font-size: x-large;
+  font-weight: 600;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: green;
+  background-color: black;
+  margin-bottom: 100px;
+}
+
+#notCorrect{
+  text-align: center;
+  font-size: x-large;
+  font-weight: 600;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: red;
+  background-color: black;
+  margin-bottom: 100px;
+}
+
+.centerButton{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.formAlign{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.innerDiv{
+  display: flex;
+  justify-content: center;
+}
+
+#p2{
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 30px;
+  font-size: x-large;
+}
+
+#p1{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-size: x-large;
+  text-align: center;
+}
+.element {
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+@media all and (min-width: 600px) {
+  body{
+    background-image: url('images/map-med.jpg');
+}
+
+@media all and (min-width: 800px) {
+  body{
+    background-image: url('images/map.jpg');
+    background-image: cover;
+}
