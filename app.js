@@ -135,12 +135,14 @@ function createResultsPage(){
       <button id="tryAgain">Try Again!</button>
     </div>`);
 }
-
 function checkAnswer(){
   let answer=$('input[name=answers]:checked').val();
-  console.log(answer);
-  if(STORE.questions[STORE.questionNumber].correctAnswer == answer){
-    STORE.score++;
+  return answer;
+}
+function answerFeedback(){
+  let checkedAnswer = checkAnswer();
+  console.log('inside answer feedback', checkedAnswer);
+  if(STORE.questions[STORE.questionNumber].correctAnswer == checkedAnswer){
     $('main').html(`
       <p id="correct">That's correct!</p>
       <div class="centerButton">  
@@ -167,12 +169,17 @@ function checkAnswer(){
 $('header').on('click', 'button', function(){
   hideHeader();
   generateQuestionPage();
-  });
+});
 
 $('main').on('submit', 'form', function(event){
   event.preventDefault();
-  checkAnswer();
-  console.log(STORE.score);
+  let checkedAnswer = checkAnswer();
+  answerFeedback();
+  console.log('inside submitted', checkedAnswer);
+  if(STORE.questions[STORE.questionNumber].correctAnswer == checkedAnswer){
+    STORE.score++;
+  }
+
 });
 
 $('main').on('click', '#next', function(){
